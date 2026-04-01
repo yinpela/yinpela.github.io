@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibiz.AI — All Ibiza, in your WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #E8B84B;
+    --gold-dark: #C8893A;
+    --black: #000000;
+    --white: #FFFFFF;
+    --grey: #888888;
+    --surface: #0a0a0a;
+    --surface2: #111111;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 32px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  }
+
+  .nav-logo {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo .ai {
+    background: linear-gradient(90deg, #F0D070, #C8893A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(200, 137, 58, 0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .eye-ring {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 32px;
+    border: 1.5px solid rgba(232, 184, 75, 0.3);
+    box-shadow: 0 0 40px rgba(232, 184, 75, 0.15);
+    position: relative;
+  }
+
+  .eye-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.1) saturate(1.1);
+  }
+
+  .hero-title {
+    font-size: clamp(56px, 12vw, 96px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .hero-title .ai {
+    background: linear-gradient(90deg, #F0D070 0%, #C8893A 55%, #E8B84B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-tagline {
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.01em;
+    margin-bottom: 56px;
+  }
+
+  .hero-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .step-text strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #E8B84B, #C8893A);
+    color: #000;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(232, 184, 75, 0.3);
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232, 184, 75, 0.4);
+  }
+
+  .cta-btn svg { width: 20px; height: 20px; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  /* ── PHONES SECTION ── */
+  #demo {
+    background: var(--surface);
+  }
+
+  .demo-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .demo-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .phones-row {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .phones-row::-webkit-scrollbar { display: none; }
+
+  .phone-card {
+    flex: 0 0 280px;
+    background: var(--surface2);
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .phone-notch {
+    width: 80px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 100px;
+    margin: 12px auto 0;
+  }
+
+  .phone-screen {
+    padding: 16px 14px 24px;
+  }
+
+  .phone-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 16px;
+  }
+
+  .phone-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .phone-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .phone-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .phone-status {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .msg {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .msg.bot { align-items: flex-start; }
+  .msg.user { align-items: flex-end; }
+
+  .bubble {
+    max-width: 88%;
+    padding: 9px 13px;
+    border-radius: 16px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .bot .bubble {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.9);
+    border-bottom-left-radius: 4px;
+  }
+
+  .user .bubble {
+    background: linear-gradient(135deg, #1a7a4a, #128C7E);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  .bubble .gold { color: var(--gold); font-weight: 600; }
+  .bubble .small { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+  .phone-label {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── FAQ SECTION ── */
+  #faq {
+    background: var(--black);
+  }
+
+  .faq-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq-header {
+    margin-bottom: 56px;
+  }
+
+  .faq-item {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 0;
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .faq-q {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .faq-a {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  .faq-a strong { color: var(--white); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-logo .ai {
+    background: linear-gradient(90deg, #F0D070, #C8893A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 13px; }
+    section { padding: 72px 20px; }
+    .phones-row { gap: 16px; }
+    .phone-card { flex: 0 0 240px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ibiz<span class="ai">.AI</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#faq">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+
+  <div class="eye-ring">
+    <img src="eye.png" alt="ibizAI"
+         onerror="this.parentElement.style.background='radial-gradient(circle, #C8893A 0%, #8B5E1A 40%, #1a0f00 70%, #000 100%)'">
+  </div>
+
+  <h1 class="hero-title">Ibiz<span class="ai">.AI</span></h1>
+  <p class="hero-tagline">All Ibiza, in your WhatsApp.</p>
+
+  <div class="hero-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Scan the QR or tap the button below</strong> — opens directly in WhatsApp.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Ask anything</strong> — restaurants, clubs, boats, transfers, villas, private services.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Real local knowledge</strong>, not tourist guides.</div>
+    </div>
+  </div>
+
+  <a class="cta-btn" href="https://wa.me/34634408530?text=Hola" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.847L0 24l6.335-1.502A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.6-.487-5.12-1.342l-.368-.214-3.76.891.945-3.658-.238-.378A9.954 9.954 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Start on WhatsApp
+  </a>
+
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="demo-inner">
+    <div class="demo-header">
+      <p class="section-label">See it in action</p>
+      <h2 class="section-title">Real conversations.<br>Real Ibiza.</h2>
+      <p class="section-sub">ibizAI speaks your language, knows the island, and gets straight to the point.</p>
+    </div>
+
+    <div class="phones-row">
+
+      <!-- PHONE 1: Who is ibizAI -->
+      <div class="phone-card">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-avatar">
+              <img src="eye.png" alt="ibizAI"
+                   onerror="this.style.background='radial-gradient(circle, #C8893A, #000)'">
+            </div>
+            <div>
+              <div class="phone-name">Ibiz.AI</div>
+              <div class="phone-status">online</div>
+            </div>
+          </div>
+
+          <div class="msg bot">
+            <div class="bubble">ibizAI 🏝️<br>Tu insider en Ibiza, 24/7.<br>Pregúntame lo que sea.</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">What even is ibizAI?</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">Think of me as the friend everyone needs on the island.<br><br>Clubs, restaurants, boats, transfers, private services — I know the real stuff, not what's on TripAdvisor.<br><br>What do you need? 🎯</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">Are you a bot?</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">Technically yes. But I know which table at DC-10 is worth fighting for and which restaurant in Sant Josep doesn't appear on any guide.<br><br>Try me. 👁️</div>
+          </div>
+        </div>
+        <div class="phone-label">Meet ibizAI</div>
+      </div>
+
+      <!-- PHONE 2: 4-day plan -->
+      <div class="phone-card">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-avatar">
+              <img src="eye.png" alt="ibizAI"
+                   onerror="this.style.background='radial-gradient(circle, #C8893A, #000)'">
+            </div>
+            <div>
+              <div class="phone-name">Ibiz.AI</div>
+              <div class="phone-status">online</div>
+            </div>
+          </div>
+
+          <div class="msg user">
+            <div class="bubble">4 days in Ibiza, 2 couples, mid-range budget. Love deep house. Plan it.</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">Perfect. Arrival day: light. Check in, sunset at Cala d'Hort — bring something to drink.<br><br><span class="gold">Day 2:</span> DC-10 Monday (Circoloco) — the institution. Doors at midnight. €40 advance. Want tickets sorted? 🎯</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">Yes sort tickets and airport transfer</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">On it.<br><br>🎟️ Circoloco tickets → ra.co/events/es/ibiza<br><br>🚐 Airport transfer for 4:<br>wa.me/34679298571?text=IbizAI<br><span class="small">10% off via ibizAI</span><br><br><span class="gold">Day 3:</span> Pacha for dinner + night. <span class="gold">Day 4:</span> boat, Es Vedrà, slow lunch. Close the trip right. 🏝️</div>
+          </div>
+        </div>
+        <div class="phone-label">4-day plan</div>
+      </div>
+
+      <!-- PHONE 3: Nails & massage -->
+      <div class="phone-card">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-avatar">
+              <img src="eye.png" alt="ibizAI"
+                   onerror="this.style.background='radial-gradient(circle, #C8893A, #000)'">
+            </div>
+            <div>
+              <div class="phone-name">Ibiz.AI</div>
+              <div class="phone-status">online</div>
+            </div>
+          </div>
+
+          <div class="msg user">
+            <div class="bubble">My friends went out. I want nails done and a massage tonight. In-villa. I'm tired.</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">Best call of the night honestly.<br><br>💅 Nails + 💆 massage in-villa — I can connect you with someone who does both, comes to you.<br><br>Where are you staying and what time works?</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">Santa Eulalia area, from 9pm</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">On it. Give me one sec —<br><br>wa.me/34679298571?text=IbizAI<br><span class="small">Tell them ibizAI sent you</span><br><br>They'll confirm availability for tonight. Enjoy the quiet evening 🖤</div>
+          </div>
+        </div>
+        <div class="phone-label">Private services</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <p class="section-label">The basics</p>
+      <h2 class="section-title">Questions.</h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Qué es ibizAI? / What is ibizAI?</div>
+      <div class="faq-a">ibizAI is an AI concierge for Ibiza that lives in your WhatsApp. No app to download, no account to create. You ask, it answers — restaurants, clubs, boats, transfers, villas, private services. <strong>Everything Ibiza, in one chat.</strong></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Por qué ibizAI? / Why ibizAI?</div>
+      <div class="faq-a">Because Google gives you tourist traps. TripAdvisor gives you outdated reviews. ibizAI gives you <strong>local knowledge</strong> — the restaurants that don't appear on any guide, the nights worth going to, the services that actually show up. Built by someone who lives here.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">ibizAI vs ChatGPT / Claude?</div>
+      <div class="faq-a">ChatGPT and Claude are general-purpose tools. ibizAI is <strong>Ibiza-specific</strong> — it knows the 2026 club season lineups, the real local spots, which operators to trust, and it's connected to live data. It's not smarter. It's more focused. And it lives where you already are: <strong>WhatsApp</strong>.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ibiz<span class="ai">.AI</span></div>
+  <div class="footer-copy">© ibizAI 2026 · All Ibiza, in your WhatsApp.</div>
+</footer>
+
+</body>
+</html>
