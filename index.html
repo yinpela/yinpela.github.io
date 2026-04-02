@@ -87,8 +87,37 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 40%, rgba(200, 137, 58, 0.12) 0%, transparent 65%);
+    background: radial-gradient(ellipse at 50% 30%, rgba(200, 137, 58, 0.2) 0%, rgba(232,184,75,0.04) 45%, transparent 70%);
     pointer-events: none;
+  }
+
+  .eye-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .eye-rays {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+      from 0deg,
+      rgba(232,184,75,0.07) 0deg 2.5deg,
+      transparent 2.5deg 16deg
+    );
+    -webkit-mask-image: radial-gradient(circle, transparent 68px, rgba(0,0,0,0.6) 90px, black 160px, transparent 300px);
+    mask-image: radial-gradient(circle, transparent 68px, rgba(0,0,0,0.6) 90px, black 160px, transparent 300px);
+    animation: slowSpin 80s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   .eye-ring {
@@ -96,10 +125,13 @@
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    margin: 0 auto 32px;
-    border: 1.5px solid rgba(232, 184, 75, 0.3);
-    box-shadow: 0 0 40px rgba(232, 184, 75, 0.15);
+    border: 1.5px solid rgba(232, 184, 75, 0.4);
+    box-shadow:
+      0 0 40px rgba(232,184,75,0.45),
+      0 0 100px rgba(232,184,75,0.2),
+      0 0 200px rgba(232,184,75,0.08);
     position: relative;
+    z-index: 1;
   }
 
   .eye-ring img {
@@ -509,9 +541,12 @@
 <section id="home">
   <div class="hero-bg"></div>
 
-  <div class="eye-ring">
-    <img src="eye.png" alt="ibizAI"
-         onerror="this.parentElement.style.background='radial-gradient(circle, #C8893A 0%, #8B5E1A 40%, #1a0f00 70%, #000 100%)'">
+  <div class="eye-wrap">
+    <div class="eye-rays"></div>
+    <div class="eye-ring">
+      <img src="eye.png" alt="ibizAI"
+           onerror="this.parentElement.style.background='radial-gradient(circle, #C8893A 0%, #8B5E1A 40%, #1a0f00 70%, #000 100%)'">
+    </div>
   </div>
 
   <h1 class="hero-title">Ibiz<span class="ai">.AI</span></h1>
