@@ -106,7 +106,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: center center;
     filter: brightness(1.1) saturate(1.1);
   }
 
@@ -199,34 +199,6 @@
 
   .cta-btn svg { width: 20px; height: 20px; }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.25);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .scroll-hint::after {
-    content: '';
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
   /* ── SECTION BASE ── */
   section {
     padding: 100px 24px;
@@ -257,7 +229,7 @@
   }
 
   /* ── PHONES SECTION ── */
-  #demo {
+  #chat {
     background: var(--surface);
   }
 
@@ -416,6 +388,44 @@
 
   .faq-a strong { color: var(--white); font-weight: 600; }
 
+  /* ── ABOUT SECTION ── */
+  #about {
+    background: var(--surface);
+  }
+
+  .about-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 56px 0 40px;
+  }
+
+  .about-logo-item {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgba(255,255,255,0.35);
+    transition: color 0.2s;
+  }
+
+  .about-logo-item:hover { color: rgba(255,255,255,0.7); }
+
+  .about-trademark {
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
   /* ── FOOTER ── */
   footer {
     padding: 40px 24px;
@@ -464,8 +474,9 @@
   <div class="nav-logo">Ibiz<span class="ai">.AI</span></div>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#demo">Demo</a></li>
-    <li><a href="#faq">About</a></li>
+    <li><a href="#chat">Chat</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
 </nav>
 
@@ -501,11 +512,11 @@
     Start on WhatsApp
   </a>
 
-  <div class="scroll-hint">scroll</div>
+
 </section>
 
-<!-- DEMO -->
-<section id="demo">
+<!-- CHAT -->
+<section id="chat">
   <div class="demo-inner">
     <div class="demo-header">
       <p class="section-label">See it in action</p>
@@ -638,6 +649,21 @@
       <div class="faq-a">ChatGPT and Claude are general-purpose tools. ibizAI is <strong>Ibiza-specific</strong> — it knows the 2026 club season lineups, the real local spots, which operators to trust, and it's connected to live data. It's not smarter. It's more focused. And it lives where you already are: <strong>WhatsApp</strong>.</div>
     </div>
 
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <p class="section-label">Behind ibizAI</p>
+    <h2 class="section-title">About</h2>
+    <div class="about-logos">
+      <div class="about-logo-item">Yeah</div>
+      <div class="about-logo-item">Pelayo</div>
+      <div class="about-logo-item">LsGlz</div>
+      <div class="about-logo-item">RealOnly</div>
+    </div>
+    <div class="about-trademark">™ All trademarks reserved · © 2035</div>
   </div>
 </section>
 
