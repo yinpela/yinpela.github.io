@@ -106,7 +106,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center 60%;
     filter: brightness(1.1) saturate(1.1);
   }
 
@@ -241,6 +241,9 @@
   .demo-header {
     text-align: center;
     margin-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .phones-row {
@@ -403,7 +406,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 48px;
     flex-wrap: wrap;
     margin: 56px 0 40px;
   }
@@ -412,11 +415,25 @@
     font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.5);
     transition: color 0.2s;
+    filter: brightness(0) invert(1);
+    opacity: 0.5;
   }
 
-  .about-logo-item:hover { color: rgba(255,255,255,0.7); }
+  .about-logo-item:hover { opacity: 0.9; }
+
+  .about-logo-img {
+    height: 60px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .about-logo-img:hover { opacity: 1; }
 
   .about-trademark {
     font-size: 12px;
@@ -659,9 +676,9 @@
     <h2 class="section-title">About</h2>
     <div class="about-logos">
       <div class="about-logo-item">Yeah</div>
-      <div class="about-logo-item">Pelayo</div>
+      <img src="logo_pelayo.jpg" alt="Pelayo" class="about-logo-img">
       <div class="about-logo-item">LsGlz</div>
-      <div class="about-logo-item">RealOnly</div>
+      <img src="logo_realonly.jpg" alt="RealOnly" class="about-logo-img">
     </div>
     <div class="about-trademark">™ All trademarks reserved · © 2035</div>
   </div>
