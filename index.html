@@ -633,7 +633,7 @@
   <div class="hero-steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-text"><strong>Scan the QR or tap the button below</strong> — opens directly in WhatsApp.</div>
+      <div class="step-text"><strong>Scan the QR or click below</strong> — opens directly in WhatsApp.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
@@ -653,7 +653,7 @@
   <div class="qr-wrap">
     <p class="qr-label">or scan to open on your phone</p>
     <a href="https://wa.me/34634408530?text=Hola" target="_blank">
-      <canvas id="qrcode"></canvas>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&margin=6&data=https://wa.me/34634408530?text=Hola" alt="Scan to open ibizAI on WhatsApp" width="110" height="110" style="border-radius:8px;display:block;">
     </a>
   </div>
 
@@ -821,15 +821,7 @@
   <div class="footer-copy">© ibizAI 2026 · All Ibiza, in your WhatsApp.</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
-  // Generate QR code
-  QRCode.toCanvas(document.getElementById('qrcode'), 'https://wa.me/34634408530?text=Hola', {
-    width: 110,
-    margin: 1,
-    color: { dark: '#000000', light: '#ffffff' }
-  });
-
   // Hamburger menu
   function toggleMenu() {
     document.getElementById('nav-dropdown').classList.toggle('open');
