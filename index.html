@@ -389,7 +389,7 @@
     padding: 16px 0 8px;
     font-size: 12px;
     font-weight: 600;
-    color: rgba(255,255,255,0.35);
+    color: var(--gold);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -521,11 +521,71 @@
     color: rgba(255,255,255,0.3);
   }
 
+  /* ── QR ── */
+  .qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  .qr-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.03em;
+  }
+  #qrcode {
+    border-radius: 8px;
+    padding: 8px;
+    background: white;
+    width: 110px;
+    height: 110px;
+  }
+
+  /* ── HAMBURGER NAV (mobile only) ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 52px;
+    right: 16px;
+    background: rgba(10,10,10,0.97);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 8px 0;
+    min-width: 140px;
+    z-index: 200;
+  }
+  .nav-dropdown.open { display: block; }
+  .nav-dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-dropdown a:hover { color: var(--white); }
+
   /* ── MOBILE ── */
   @media (max-width: 600px) {
-    nav { padding: 16px 20px; }
-    .nav-links { gap: 20px; }
-    .nav-links a { font-size: 13px; }
+    nav { padding: 14px 16px; position: relative; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
     section { padding: 72px 20px; }
     .phones-row { gap: 16px; }
     .phone-card { flex: 0 0 240px; }
@@ -544,6 +604,15 @@
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#about">About</a></li>
   </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-dropdown" id="nav-dropdown">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#chat" onclick="closeMenu()">Chat</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -581,6 +650,12 @@
     Start on WhatsApp
   </a>
 
+  <div class="qr-wrap">
+    <p class="qr-label">or scan to open on your phone</p>
+    <a href="https://wa.me/34634408530?text=Hola" target="_blank">
+      <canvas id="qrcode"></canvas>
+    </a>
+  </div>
 
 </section>
 
@@ -745,6 +820,28 @@
   <div class="footer-logo">Ibiz<span class="ai">.AI</span></div>
   <div class="footer-copy">© ibizAI 2026 · All Ibiza, in your WhatsApp.</div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+  // Generate QR code
+  QRCode.toCanvas(document.getElementById('qrcode'), 'https://wa.me/34634408530?text=Hola', {
+    width: 110,
+    margin: 1,
+    color: { dark: '#000000', light: '#ffffff' }
+  });
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById('nav-dropdown').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('nav-dropdown').classList.remove('open');
+  }
+  // Close menu on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('nav')) closeMenu();
+  });
+</script>
 
 </body>
 </html>
