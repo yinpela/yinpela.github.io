@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -601,7 +601,7 @@
   <ul class="nav-links" translate="no">
     <li><a href="#home">Home</a></li>
     <li><a href="#chat">Chat</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#faq" id="nav-faq">FAQ</a></li>
     <li><a href="#about">About</a></li>
   </ul>
   <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
@@ -610,7 +610,7 @@
   <div class="nav-dropdown" id="nav-dropdown">
     <a href="#home" onclick="closeMenu()">Home</a>
     <a href="#chat" onclick="closeMenu()">Chat</a>
-    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#faq" onclick="closeMenu()" id="nav-faq-mob">FAQ</a>
     <a href="#about" onclick="closeMenu()">About</a>
   </div>
 </nav>
@@ -628,30 +628,30 @@
   </div>
 
   <h1 class="hero-title">Ibiz<span class="ai">.AI</span></h1>
-  <p class="hero-tagline">All Ibiza, in your WhatsApp.</p>
+  <p class="hero-tagline" id="tagline">All Ibiza, in your WhatsApp.</p>
 
   <div class="hero-steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-text"><strong>Click below or scan the QR</strong> — opens directly in WhatsApp.</div>
+      <div class="step-text" id="step1"><strong>Click below or scan the QR</strong> — opens directly in WhatsApp.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-text"><strong>Ask anything</strong> — a boat for the day, local trails, in-villa everything, transfers, tables, sunset options and more.</div>
+      <div class="step-text" id="step2"><strong>Ask anything</strong> — a boat for the day, local trails, in-villa everything, transfers, tables, sunset options and more.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-text"><strong>Real local knowledge</strong>, not tourist guides.</div>
+      <div class="step-text" id="step3"><strong>Real local knowledge</strong>, not tourist guides.</div>
     </div>
   </div>
 
   <a class="cta-btn" href="https://wa.me/34634408530?text=Hola" target="_blank">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.847L0 24l6.335-1.502A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.6-.487-5.12-1.342l-.368-.214-3.76.891.945-3.658-.238-.378A9.954 9.954 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-    Start on WhatsApp
+    <span id="cta-text">Start on WhatsApp</span>
   </a>
 
   <div class="qr-wrap">
-    <p class="qr-label">or scan to open on your phone</p>
+    <p class="qr-label" id="qr-label">or scan to open on your phone</p>
     <a href="https://wa.me/34634408530?text=Hola" target="_blank">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&margin=6&data=https://wa.me/34634408530?text=Hola" alt="Scan to open ibizAI on WhatsApp" width="110" height="110" style="border-radius:8px;display:block;">
     </a>
@@ -663,9 +663,9 @@
 <section id="chat">
   <div class="demo-inner">
     <div class="demo-header">
-      <p class="section-label">See it in action</p>
-      <h2 class="section-title">Real conversations.<br>Real Ibiza.</h2>
-      <p class="section-sub"><span style="color:var(--gold)">ibizAI</span> speaks your language, knows the island, and gets straight to the point.</p>
+      <p class="section-label" id="chat-label">See it in action</p>
+      <h2 class="section-title" id="chat-title">Real conversations.<br>Real Ibiza.</h2>
+      <p class="section-sub" id="chat-sub"><span style="color:var(--gold)">ibizAI</span> speaks your language, knows the island, and gets straight to the point.</p>
     </div>
 
     <div class="phones-row">
@@ -774,8 +774,8 @@
 <section id="faq">
   <div class="faq-inner">
     <div class="faq-header">
-      <p class="section-label">The basics</p>
-      <h2 class="section-title">Questions.</h2>
+      <p class="section-label" id="faq-label">The basics</p>
+      <h2 class="section-title" id="faq-title">Questions.</h2>
     </div>
 
     <div class="faq-item">
@@ -799,8 +799,8 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-inner">
-    <p class="section-label">Behind ibizAI</p>
-    <h2 class="section-title">About</h2>
+    <p class="section-label" id="about-label">Behind ibizAI</p>
+    <h2 class="section-title" id="about-title">About</h2>
     <div class="about-logos">
       <img src="logo_yeah.jpg" alt="Yeah" class="about-logo-img invert">
       <img src="logo_pelayo.jpg" alt="Pelayo" class="about-logo-img">
@@ -822,6 +822,37 @@
 </footer>
 
 <script>
+  // Language switcher — auto-detects Spanish, defaults to English
+  const translations = {
+    'nav-faq':      { es: 'Preguntas',    en: 'FAQ' },
+    'nav-faq-mob':  { es: 'Preguntas',    en: 'FAQ' },
+    'tagline':      { es: 'Toda Ibiza, en tu WhatsApp.', en: 'All Ibiza, in your WhatsApp.' },
+    'step1':        { es: '<strong>Haz clic abajo o escanea el QR</strong> — se abre directamente en WhatsApp.', en: '<strong>Click below or scan the QR</strong> — opens directly in WhatsApp.' },
+    'step2':        { es: '<strong>Pregunta lo que quieras</strong> — un barco para el día, rutas locales, todo en villa, transfers, mesas, opciones de atardecer y más.', en: '<strong>Ask anything</strong> — a boat for the day, local trails, in-villa everything, transfers, tables, sunset options and more.' },
+    'step3':        { es: '<strong>Conocimiento local real</strong>, no guías turísticas.', en: '<strong>Real local knowledge</strong>, not tourist guides.' },
+    'cta-text':     { es: 'Empieza en WhatsApp', en: 'Start on WhatsApp' },
+    'qr-label':     { es: 'o escanea para abrir en tu móvil', en: 'or scan to open on your phone' },
+    'chat-label':   { es: 'Cómo Funciona', en: 'See it in action' },
+    'chat-title':   { es: 'Conversaciones reales.<br>Ibiza real.', en: 'Real conversations.<br>Real Ibiza.' },
+    'chat-sub':     { es: '<span style="color:var(--gold)">ibizAI</span> habla tu idioma, conoce la isla y va al grano.', en: '<span style="color:var(--gold)">ibizAI</span> speaks your language, knows the island, and gets straight to the point.' },
+    'faq-label':    { es: 'Lo básico', en: 'The basics' },
+    'faq-title':    { es: 'Preguntas.', en: 'Questions.' },
+    'about-label':  { es: 'Detrás de ibizAI', en: 'Behind ibizAI' },
+    'about-title':  { es: 'Sobre Nosotros', en: 'About' },
+  };
+
+  function applyLang(lang) {
+    const l = lang === 'es' ? 'es' : 'en';
+    document.documentElement.lang = l;
+    for (const [id, t] of Object.entries(translations)) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = t[l];
+    }
+  }
+
+  const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  applyLang(userLang.startsWith('es') ? 'es' : 'en');
+
   // Hamburger menu
   function toggleMenu() {
     document.getElementById('nav-dropdown').classList.toggle('open');
