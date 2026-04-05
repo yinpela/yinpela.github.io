@@ -35,7 +35,15 @@
     font-weight: 700;
     color: var(--gold);
     margin-bottom: 32px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .status-card {
@@ -130,7 +138,10 @@
 </head>
 <body>
 
-<a class="logo" href="/">← ibizAI</a>
+<a class="logo" href="/">
+  <img src="eye.png" alt="ibizAI">
+  ← Ibiz<span style="color:var(--gold)">.AI</span>
+</a>
 
 <div id="loading">Loading status...</div>
 <div id="content" style="display:none">
