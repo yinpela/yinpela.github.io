@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ibizAI — Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #E8B84B;
+    --black: #000000;
+    --surface: #0a0a0a;
+    --surface2: #111111;
+    --white: #FFFFFF;
+    --grey: #888888;
+    --green: #4caf50;
+    --red: #e53935;
+  }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: inline-block;
+  }
+
+  .status-card {
+    background: var(--surface2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .big-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .big-dot.up   { background: var(--green); box-shadow: 0 0 0 5px rgba(76,175,80,0.15); }
+  .big-dot.down { background: var(--red);   box-shadow: 0 0 0 5px rgba(229,57,53,0.15); }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
+    50%       { box-shadow: 0 0 0 7px rgba(76,175,80,0); }
+  }
+  .big-dot.up { animation: pulse 2.5s ease-in-out infinite; }
+
+  .status-label { font-size: 22px; font-weight: 600; }
+  .status-sub   { font-size: 13px; color: var(--grey); margin-top: 4px; }
+
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .meta-box {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 18px 20px;
+    flex: 1;
+  }
+  .meta-val { font-size: 22px; font-weight: 700; color: var(--gold); }
+  .meta-lbl { font-size: 12px; color: var(--grey); margin-top: 4px; }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .history-table th {
+    text-align: left;
+    padding: 8px 12px;
+    color: var(--grey);
+    font-weight: 500;
+    border-bottom: 1px solid #222;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .history-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    color: rgba(255,255,255,0.75);
+  }
+  .dot-sm {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-sm.up   { background: var(--green); }
+  .dot-sm.down { background: var(--red); }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  #loading { color: var(--grey); font-size: 14px; padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+
+<a class="logo" href="/">← ibizAI</a>
+
+<div id="loading">Loading status...</div>
+<div id="content" style="display:none">
+
+  <div class="status-card" id="main-card">
+    <div class="big-dot" id="main-dot"></div>
+    <div>
+      <div class="status-label" id="main-label">—</div>
+      <div class="status-sub" id="main-sub">—</div>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-box">
+      <div class="meta-val" id="meta-latency">—</div>
+      <div class="meta-lbl">Last response time</div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-val" id="meta-scenarios">—</div>
+      <div class="meta-lbl">Scenarios run today</div>
+    </div>
+  </div>
+
+  <div class="section-title">Run history</div>
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Latency</th>
+        <th>Scenarios</th>
+      </tr>
+    </thead>
+    <tbody id="history-body"></tbody>
+  </table>
+
+</div>
+
+<div class="footer">
+  ibizAI TESTER — checks run daily<br>
+  <a href="/">ibizai.love</a>
+</div>
+
+<script>
+  function fmt(isoStr) {
+    try {
+      const d = new Date(isoStr);
+      return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' })
+           + ' ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    } catch(e) { return isoStr; }
+  }
+
+  fetch('/status.json?_=' + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+
+      if (!data) {
+        document.getElementById('main-dot').className = 'big-dot up';
+        document.getElementById('main-label').textContent = 'Bot is live';
+        document.getElementById('main-sub').textContent = 'Status page active — first test run pending';
+        return;
+      }
+
+      const dot   = document.getElementById('main-dot');
+      const label = document.getElementById('main-label');
+      const sub   = document.getElementById('main-sub');
+
+      if (data.is_up) {
+        dot.className = 'big-dot up';
+        label.textContent = 'All systems operational';
+      } else {
+        dot.className = 'big-dot down';
+        label.textContent = 'Bot is offline';
+      }
+      sub.textContent = 'Last checked ' + fmt(data.ts);
+
+      document.getElementById('meta-latency').textContent =
+        data.latency_ms ? data.latency_ms + 'ms' : '—';
+      document.getElementById('meta-scenarios').textContent =
+        data.scenarios_run || 0;
+    })
+    .catch(() => {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+      document.getElementById('main-dot').className = 'big-dot up';
+      document.getElementById('main-label').textContent = 'Bot is live';
+      document.getElementById('main-sub').textContent = 'Status page active';
+    });
+
+  // Load history from tester log (last 14 entries)
+  fetch('/status_history.json?_=' + Date.now())
+    .then(r => r.ok ? r.json() : [])
+    .then(history => {
+      const tbody = document.getElementById('history-body');
+      if (!history.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:#555;padding:16px 12px">No history yet — first run pending</td></tr>';
+        return;
+      }
+      history.slice().reverse().slice(0, 14).forEach(entry => {
+        const tr = document.createElement('tr');
+        const cls = entry.is_up ? 'up' : 'down';
+        tr.innerHTML = `
+          <td>${fmt(entry.ts)}</td>
+          <td><span class="dot-sm ${cls}"></span>${entry.is_up ? 'Up' : 'Down'}</td>
+          <td>${entry.latency_ms ? entry.latency_ms + 'ms' : '—'}</td>
+          <td>${entry.scenarios_run || 0}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(() => {});
+</script>
+
+</body>
+</html>

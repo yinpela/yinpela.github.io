@@ -543,6 +543,31 @@
     height: 110px;
   }
 
+  /* ── STATUS DOT ── */
+  .bot-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 18px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.03em;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4caf50;
+    flex-shrink: 0;
+  }
+  .status-dot.down { background: #e53935; }
+  .status-dot.unknown { background: #888; }
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); }
+    50%       { box-shadow: 0 0 0 4px rgba(76,175,80,0); }
+  }
+  .status-dot:not(.down):not(.unknown) { animation: pulse-green 2.5s ease-in-out infinite; }
+
   /* ── HAMBURGER NAV (mobile only) ── */
   .nav-hamburger {
     display: none;
@@ -656,6 +681,13 @@
     <a href="https://wa.me/34634408530?text=Hola" target="_blank">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&margin=6&data=https://wa.me/34634408530?text=Hola" alt="Scan to open ibizAI on WhatsApp" width="110" height="110" style="border-radius:8px;display:block;">
     </a>
+  </div>
+
+  <div class="bot-status-bar">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text">Bot is live</span>
+    <span style="opacity:0.4">·</span>
+    <a href="/status.html" style="color:rgba(255,255,255,0.35);text-decoration:none;" id="status-link">status</a>
   </div>
 
 </section>
@@ -871,6 +903,22 @@
   document.addEventListener('click', function(e) {
     if (!e.target.closest('nav')) closeMenu();
   });
+
+  // Status dot — fetch status.json written by TESTER
+  fetch('/status.json?_=' + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      const dot  = document.getElementById('status-dot');
+      const text = document.getElementById('status-text');
+      if (!data) return; // file not yet generated — default green stays
+      if (data.is_up === false) {
+        dot.classList.add('down');
+        text.textContent = 'Bot offline';
+      } else {
+        text.textContent = 'Bot is live';
+      }
+    })
+    .catch(() => {}); // silently ignore if file missing
 </script>
 
 </body>
