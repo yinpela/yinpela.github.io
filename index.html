@@ -48,13 +48,14 @@
     letter-spacing: -0.02em;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
   }
   .nav-logo img {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     object-fit: cover;
+    margin-left: 5px;
   }
 
   .nav-logo .ai {
@@ -517,6 +518,16 @@
     font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .footer-logo img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 5px;
   }
 
   .footer-logo .ai {
@@ -633,8 +644,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="eye.png" alt="ibizAI">
-    Ibiz<span class="ai">.AI</span>
+    Ibiz<span class="ai">.AI</span><img src="eye.png" alt="ibizAI">
   </div>
   <ul class="nav-links" translate="no">
     <li><a href="#home">Home</a></li>
@@ -862,7 +872,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Ibiz<span class="ai">.AI</span></div>
+  <div class="footer-logo">Ibiz<span class="ai">.AI</span><img src="eye.png" alt="ibizAI"></div>
   <div class="footer-copy">© ibizAI 2026 · All Ibiza, in your WhatsApp.</div>
 </footer>
 
