@@ -378,7 +378,7 @@
 
   .bubble {
     max-width: 88%;
-    padding: 7px 10px 6px;
+    padding: 7px 10px 18px;
     border-radius: 8px;
     font-size: 12.5px;
     line-height: 1.45;
@@ -391,24 +391,66 @@
     border-top-left-radius: 0;
   }
 
+  .bot .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 0;
+    border-color: transparent #1f2c34 transparent transparent;
+  }
+
   .user .bubble {
     background: #005c4b;
     color: #e9edef;
     border-top-right-radius: 0;
   }
 
+  .user .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 8px 8px;
+    border-color: transparent transparent transparent #005c4b;
+  }
+
   .bubble .ts {
     font-size: 10px;
     color: #8696a0;
-    float: right;
-    margin-left: 8px;
-    margin-top: 2px;
+    position: absolute;
+    bottom: 4px;
+    right: 8px;
     line-height: 1;
+  }
+
+  .user .bubble .ts {
+    color: #8696a0;
   }
 
   .user .bubble .ts::after {
     content: ' ✓✓';
     color: #53bdeb;
+  }
+
+  .chat-date {
+    text-align: center;
+    margin: 6px 0;
+  }
+
+  .chat-date span {
+    background: #182229;
+    color: #8696a0;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 7px;
+    display: inline-block;
   }
 
   .bubble .gold { color: var(--gold); font-weight: 600; }
@@ -764,14 +806,15 @@
             </div>
           </div>
 
+          <div class="chat-date"><span>Today</span></div>
           <div class="msg bot">
-            <div class="bubble">ibizAI — Ibiza's insider on WhatsApp 🏝️<br><br>A boat for the day, local trails, in-villa everything, transfers, VIP tables — real knowledge. Not a tourist guide — the actual connect.<br><br>What brings you to the island? 🎯</div>
+            <div class="bubble">ibizAI — Ibiza's insider on WhatsApp 🏝️<br><br>A boat for the day, local trails, in-villa everything, transfers, VIP tables — real knowledge. Not a tourist guide — the actual connect.<br><br>What brings you to the island? 🎯<span class="ts">11:03</span></div>
           </div>
           <div class="msg user">
-            <div class="bubble">Are you a bot?</div>
+            <div class="bubble">Are you a bot?<span class="ts">11:04</span></div>
           </div>
           <div class="msg bot">
-            <div class="bubble">Technically yes. But I know which night at Pacha is worth the ticket, which restaurant in Sant Josep doesn't appear on any guide, and I've been fed real local knowledge by people who actually live here.<br><br>Try me. 👁️</div>
+            <div class="bubble">Technically yes. But I know which night at Pacha is worth the ticket, which restaurant in Sant Josep doesn't appear on any guide, and I've been fed real local knowledge by people who actually live here.<br><br>Try me. 👁️<span class="ts">11:04</span></div>
           </div>
         </div>
       </div>
@@ -792,17 +835,18 @@
             </div>
           </div>
 
+          <div class="chat-date"><span>Today</span></div>
           <div class="msg user">
-            <div class="bubble">4 days in Ibiza, 2 couples, mid-range budget. Love deep house. Plan it.</div>
+            <div class="bubble">4 days in Ibiza, 2 couples, mid-range budget. Love deep house. Plan it.<span class="ts">14:21</span></div>
           </div>
           <div class="msg bot">
-            <div class="bubble">Perfect. Arrival day: light. Check in, sunset at Cala d'Hort — bring something to drink.<br><br><span class="gold">Day 2:</span> DC-10 ✈️ Monday (Circoloco 🤡) — the institution. Doors at midnight. €40 advance. Want tickets sorted? 🎯</div>
+            <div class="bubble">Perfect. Arrival day: light. Check in, sunset at Cala d'Hort — bring something to drink.<br><br><span class="gold">Day 2:</span> DC-10 ✈️ Monday (Circoloco 🤡) — the institution. Doors at midnight. €40 advance. Want tickets sorted? 🎯<span class="ts">14:21</span></div>
           </div>
           <div class="msg user">
-            <div class="bubble">Yes sort tickets and airport transfer</div>
+            <div class="bubble">Yes sort tickets and airport transfer<span class="ts">14:22</span></div>
           </div>
           <div class="msg bot">
-            <div class="bubble">On it. Give me one sec —<br><br>🎟️ Circoloco 🤡 tickets:<br><a href="https://ra.co/events/es/ibiza" target="_blank" class="chat-link">ra.co/events/es/ibiza</a><br><br>🚐 Airport transfer for 4:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">10% off when you mention ibizAI</span><br><br><span class="gold">Day 3:</span> Pacha 🍒 — dinner + night out. <span class="gold">Day 4:</span> VIP table at Ushuaïa for sunset. We close it right. 🏝️</div>
+            <div class="bubble">On it. Give me one sec —<br><br>🎟️ Circoloco 🤡 tickets:<br><a href="https://ra.co/events/es/ibiza" target="_blank" class="chat-link">ra.co/events/es/ibiza</a><br><br>🚐 Airport transfer for 4:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">10% off when you mention ibizAI</span><br><br><span class="gold">Day 3:</span> Pacha 🍒 — dinner + night out. <span class="gold">Day 4:</span> VIP table at Ushuaïa for sunset. We close it right. 🏝️<span class="ts">14:22</span></div>
           </div>
         </div>
       </div>
@@ -823,17 +867,18 @@
             </div>
           </div>
 
+          <div class="chat-date"><span>Today</span></div>
           <div class="msg user">
-            <div class="bubble">My friends went out. I want nails done and a massage tonight. In-villa. I'm tired.</div>
+            <div class="bubble">My friends went out. I want nails done and a massage tonight. In-villa. I'm tired.<span class="ts">21:07</span></div>
           </div>
           <div class="msg bot">
-            <div class="bubble">Best call of the night honestly.<br><br>💅 Nails + 💆 massage in-villa — I can connect you with someone who does both, comes to you.<br><br>Where are you staying and what time works?</div>
+            <div class="bubble">Best call of the night honestly.<br><br>💅 Nails + 💆 massage in-villa — I can connect you with someone who does both, comes to you.<br><br>Where are you staying and what time works?<span class="ts">21:07</span></div>
           </div>
           <div class="msg user">
-            <div class="bubble">Santa Eulalia area, from 9pm</div>
+            <div class="bubble">Santa Eulalia area, from 9pm<span class="ts">21:08</span></div>
           </div>
           <div class="msg bot">
-            <div class="bubble">On it. Give me one sec —<br><br>💅 Wellness Ibiza — nails + massage in-villa:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">Tell them ibizAI sent you</span><br><br>They're brilliant at this. Will confirm for tonight. Enjoy the quiet evening 🖤</div>
+            <div class="bubble">On it. Give me one sec —<br><br>💅 Wellness Ibiza — nails + massage in-villa:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">Tell them ibizAI sent you</span><br><br>They're brilliant at this. Will confirm for tonight. Enjoy the quiet evening 🖤<span class="ts">21:08</span></div>
           </div>
         </div>
       </div>
