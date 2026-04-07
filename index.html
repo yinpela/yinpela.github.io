@@ -325,22 +325,25 @@
     margin: 12px auto 0;
   }
 
+  /* WhatsApp dark theme accurate */
   .phone-screen {
-    padding: 16px 14px 24px;
+    padding: 0 0 16px;
+    background: #0b141a;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
   .phone-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 0 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    margin-bottom: 16px;
+    padding: 10px 14px 10px;
+    background: #1f2c34;
+    margin-bottom: 8px;
   }
 
   .phone-avatar {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
@@ -355,17 +358,19 @@
   .phone-name {
     font-size: 13px;
     font-weight: 600;
+    color: #e9edef;
   }
 
   .phone-status {
     font-size: 11px;
-    color: rgba(255,255,255,0.4);
+    color: #8696a0;
   }
 
   .msg {
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     display: flex;
     flex-direction: column;
+    padding: 0 8px;
   }
 
   .msg.bot { align-items: flex-start; }
@@ -373,27 +378,42 @@
 
   .bubble {
     max-width: 88%;
-    padding: 9px 13px;
-    border-radius: 16px;
+    padding: 7px 10px 6px;
+    border-radius: 8px;
     font-size: 12.5px;
     line-height: 1.45;
+    position: relative;
   }
 
   .bot .bubble {
-    background: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.9);
-    border-bottom-left-radius: 4px;
+    background: #1f2c34;
+    color: #e9edef;
+    border-top-left-radius: 0;
   }
 
   .user .bubble {
-    background: linear-gradient(135deg, #1a7a4a, #128C7E);
-    color: #fff;
-    border-bottom-right-radius: 4px;
+    background: #005c4b;
+    color: #e9edef;
+    border-top-right-radius: 0;
+  }
+
+  .bubble .ts {
+    font-size: 10px;
+    color: #8696a0;
+    float: right;
+    margin-left: 8px;
+    margin-top: 2px;
+    line-height: 1;
+  }
+
+  .user .bubble .ts::after {
+    content: ' ✓✓';
+    color: #53bdeb;
   }
 
   .bubble .gold { color: var(--gold); font-weight: 600; }
-  .bubble .small { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
-  .bubble .chat-link { color: #5eb5f7; text-decoration: underline; word-break: break-all; font-size: 12px; }
+  .bubble .small { font-size: 11px; color: #8696a0; margin-top: 3px; display: block; }
+  .bubble .chat-link { color: #53bdeb; text-decoration: none; word-break: break-all; font-size: 12px; }
 
   .phone-label {
     text-align: center;
@@ -745,13 +765,7 @@
           </div>
 
           <div class="msg bot">
-            <div class="bubble">ibizAI 🏝️<br>Tu insider en Ibiza, 24/7.<br>Pregúntame lo que sea.</div>
-          </div>
-          <div class="msg user">
-            <div class="bubble">What even is ibizAI?</div>
-          </div>
-          <div class="msg bot">
-            <div class="bubble">Think of me as the friend everyone needs on the island.<br><br>Clubs, restaurants, boats, transfers, private services — I know the real stuff, not what's on TripAdvisor.<br><br>What do you need? 🎯</div>
+            <div class="bubble">ibizAI — Ibiza's insider on WhatsApp 🏝️<br><br>A boat for the day, local trails, in-villa everything, transfers, VIP tables — real knowledge. Not a tourist guide — the actual connect.<br><br>What brings you to the island? 🎯</div>
           </div>
           <div class="msg user">
             <div class="bubble">Are you a bot?</div>
@@ -788,7 +802,7 @@
             <div class="bubble">Yes sort tickets and airport transfer</div>
           </div>
           <div class="msg bot">
-            <div class="bubble">On it. Give me one sec —<br><br>🎟️ Circoloco 🤡 tickets:<br><a href="https://ra.co/events/es/ibiza" target="_blank" class="chat-link">ra.co/events/es/ibiza</a><br><br>🚐 Airport transfer for 4:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">10% off when you mention ibizAI</span><br><br><span class="gold">Day 3:</span> Pacha 🍒 for dinner + night. <span class="gold">Day 4:</span> boat, Es Vedrà, slow lunch. Close the trip right. 🏝️</div>
+            <div class="bubble">On it. Give me one sec —<br><br>🎟️ Circoloco 🤡 tickets:<br><a href="https://ra.co/events/es/ibiza" target="_blank" class="chat-link">ra.co/events/es/ibiza</a><br><br>🚐 Airport transfer for 4:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">10% off when you mention ibizAI</span><br><br><span class="gold">Day 3:</span> Pacha 🍒 — dinner + night out. <span class="gold">Day 4:</span> VIP table at Ushuaïa for sunset. We close it right. 🏝️</div>
           </div>
         </div>
       </div>
@@ -819,7 +833,7 @@
             <div class="bubble">Santa Eulalia area, from 9pm</div>
           </div>
           <div class="msg bot">
-            <div class="bubble">On it. Give me one sec —<br><br>💅 Fanny — nails + massage in-villa:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">Tell her ibizAI sent you</span><br><br>She's brilliant at this. They'll confirm for tonight. Enjoy the quiet evening 🖤</div>
+            <div class="bubble">On it. Give me one sec —<br><br>💅 Wellness Ibiza — nails + massage in-villa:<br><a href="https://wa.me/34679298571?text=IbizAI" target="_blank" class="chat-link">wa.me/34679298571?text=IbizAI</a><br><span class="small">Tell them ibizAI sent you</span><br><br>They're brilliant at this. Will confirm for tonight. Enjoy the quiet evening 🖤</div>
           </div>
         </div>
       </div>
