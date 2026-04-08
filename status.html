@@ -140,7 +140,7 @@
 
 <a class="logo" href="/">
   <img src="eye.png" alt="ibizAI">
-  ← Ibiz<span style="color:var(--gold)">.AI</span>
+  <span>← Ibiz<span style="color:var(--gold)">.AI</span></span>
 </a>
 
 <div id="loading">Loading status...</div>
@@ -151,6 +151,17 @@
     <div>
       <div class="status-label" id="main-label">—</div>
       <div class="status-sub" id="main-sub">—</div>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-box">
+      <div class="meta-val" id="meta-users-total">—</div>
+      <div class="meta-lbl">Total users</div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-val" id="meta-msgs-today">—</div>
+      <div class="meta-lbl">Messages today</div>
     </div>
   </div>
 
@@ -232,6 +243,18 @@
       document.getElementById('main-label').textContent = 'Bot is live';
       document.getElementById('main-sub').textContent = 'Status page active';
     });
+
+  // Load analytics data
+  fetch('/analytics.json?_=' + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data) return;
+      document.getElementById('meta-users-total').textContent =
+        data.total_users_ever != null ? data.total_users_ever : '—';
+      document.getElementById('meta-msgs-today').textContent =
+        data.messages_today != null ? data.messages_today : '—';
+    })
+    .catch(() => {});
 
   // Load history from tester log (last 14 entries)
   fetch('/status_history.json?_=' + Date.now())
